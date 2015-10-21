@@ -12,7 +12,7 @@ namespace Moker.Tests
     {
         string Value { get; set; }
     }
-
+    
     public class ClassWithNoDependencies
     {
     }
@@ -32,16 +32,16 @@ namespace Moker.Tests
         }
     }
 
-    //[TestFixture]
-    //public class ClassWithSingleDependencyTests : TestFor<ClassWithSingleDependency>
-    //{
-    //    [Test]
-    //    public void Should_Initialize_Instance()
-    //    {
-    //        Assert.IsNotNull(Target);
-    //        Assert.IsTrue(Target.GetType() == typeof(ClassWithNoDependencies));
-    //    }
-    //}
+    [TestFixture]
+    public class ClassWithSingleDependencyTests : TestFor<ClassWithSingleDependency>
+    {
+        [Test]
+        public void Should_Initialize_Instance()
+        {
+            Assert.IsNotNull(Target);
+            Assert.IsTrue(Target.GetType() == typeof(ClassWithSingleDependency));
+        }
+    }
 
     [TestFixture]
     public class ClassWithNoDependenciesTests : TestFor<ClassWithNoDependencies>

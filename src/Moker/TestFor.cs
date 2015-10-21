@@ -9,12 +9,33 @@ namespace Moker
     public class TestFor<T> where T : class
     {
         public T Target { get; private set; }
-        private readonly IDictionary<Type, IMockInstance> _mocks = new Dictionary<Type, IMockInstance>();
+        private readonly IDictionary<Type, Mock> _mocks = new Dictionary<Type, Mock>();
 
         public TestFor()
         {
-            if (TargetRequiresDependencies())
+            var parameterTypes = GetMaxParameterContructurList();
+
+            if (parameterTypes.Count > 0)
             {
+                var parameterMocks = new List<Mock>();
+                foreach (Type type in parameterTypes)
+                {
+                    Mock mock;
+                    if (!_mocks.ContainsKey(type))
+                    {
+                        mock = BuildMock(type);
+                        _mocks.Add(type, mock);
+                    }
+                    else
+                    {
+                        mock = _mocks[type];
+                    }
+
+                    parameterMocks.Add(mock);
+                }
+
+                var constructor = GetConstructorWithLongestParamList();
+                Target = (T) constructor.Invoke(parameterMocks.Select(x => x.Object).ToArray());
             }
             else
             {
@@ -26,28 +47,39 @@ namespace Moker
         {
             if (!_mocks.ContainsKey(typeof (T2)))
             {
-                var instance = new MockInstance {Mock = new Mock<T2>()};
-                _mocks.Add(typeof (T2), instance);
+                _mocks.Add(typeof (T2), BuildMock(typeof(T2)));
             }
 
-            return (Mock<T2>) _mocks[typeof (T2)].Mock;
+            return (Mock<T2>) _mocks[typeof (T2)];
         }
 
-        private bool TargetRequiresDependencies()
+        private Mock BuildMock(Type objectType)
         {
-            var publicConstructors = typeof (T).GetConstructors(BindingFlags.Public);
-            return publicConstructors.Any(x => x.GetParameters().Length == 0);
+            var mockType = typeof (Mock<>).MakeGenericType(objectType);
+            return (Mock) Activator.CreateInstance(mockType);
+        }
+        
+        // NOTE: Worth unit testing due many possible scenarios:
+        // no constructos (private parameterless), one constructor, multiple constructors
+        // parameter type contraints?
+        private ICollection<Type> GetMaxParameterContructurList()
+        {
+            ConstructorInfo maxParameterConstructor = GetConstructorWithLongestParamList();
+
+            if (maxParameterConstructor == null)
+            {
+                throw new Exception("Class has no public constructors");
+            }
+
+            return maxParameterConstructor.GetParameters().Select(x => x.ParameterType).ToList();
+        }
+
+        private ConstructorInfo GetConstructorWithLongestParamList()
+        {
+            var publicConstructors = typeof(T).GetConstructors(BindingFlags.Public | BindingFlags.Instance);
+            return publicConstructors
+                .OrderBy(x => x.GetParameters().Length)
+                .FirstOrDefault();
         }
     }
-
-    internal interface IMockInstance
-    {
-        object Mock { get; set; }
-    }
-
-    internal class MockInstance : IMockInstance
-    {
-        public object Mock { get; set; }
-    }
-
 }
