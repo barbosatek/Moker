@@ -13,7 +13,8 @@ namespace Moker
 
         public TestFor()
         {
-            var parameterTypes = GetMaxParameterContructurList();
+            ConstructorInfo constructor = ClassContructorUtility.GetConstructorWithLongestParamList(typeof (T));
+            List<Type> parameterTypes = constructor.GetParameters().Select(x => x.ParameterType).ToList();
 
             if (parameterTypes.Count > 0)
             {
@@ -33,8 +34,7 @@ namespace Moker
 
                     parameterMocks.Add(mock);
                 }
-
-                var constructor = GetConstructorWithLongestParamList();
+                
                 Target = (T) constructor.Invoke(parameterMocks.Select(x => x.Object).ToArray());
             }
             else
@@ -57,29 +57,6 @@ namespace Moker
         {
             var mockType = typeof (Mock<>).MakeGenericType(objectType);
             return (Mock) Activator.CreateInstance(mockType);
-        }
-        
-        // NOTE: Worth unit testing due many possible scenarios:
-        // no constructos (private parameterless), one constructor, multiple constructors
-        // parameter type contraints?
-        private ICollection<Type> GetMaxParameterContructurList()
-        {
-            ConstructorInfo maxParameterConstructor = GetConstructorWithLongestParamList();
-
-            if (maxParameterConstructor == null)
-            {
-                throw new Exception("Class has no public constructors");
-            }
-
-            return maxParameterConstructor.GetParameters().Select(x => x.ParameterType).ToList();
-        }
-
-        private ConstructorInfo GetConstructorWithLongestParamList()
-        {
-            var publicConstructors = typeof(T).GetConstructors(BindingFlags.Public | BindingFlags.Instance);
-            return publicConstructors
-                .OrderBy(x => x.GetParameters().Length)
-                .FirstOrDefault();
         }
     }
 }

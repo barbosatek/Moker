@@ -48,6 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Artifacts\ClassWithEmptyDefaultConstructor.cs" />
+    <Compile Include="Artifacts\ClassWithSingleInterfaceConstructor.cs" />
+    <Compile Include="Artifacts\IDependencyA.cs" />
+    <Compile Include="Artifacts\IDependencyB.cs" />
+    <Compile Include="ClassContructorUtilityTests.cs" />
     <Compile Include="TestForTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -60,6 +65,7 @@
       <Name>Moker</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

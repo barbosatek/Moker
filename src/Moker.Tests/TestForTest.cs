@@ -1,56 +1,28 @@
-﻿using Moq;
+﻿using Moker.Tests.Artifacts;
+using Moq;
 using NUnit.Framework;
 
 namespace Moker.Tests
 {
-    public interface IDependencyA
-    {
-        string Value { get; set; }
-    }
-
-    public interface IDependencyB
-    {
-        string Value { get; set; }
-    }
-    
-    public class ClassWithNoDependencies
-    {
-    }
-
-    public class ClassWithSingleDependency
-    {
-        private readonly IDependencyA _dependencyA;
-
-        public ClassWithSingleDependency(IDependencyA dependencyA)
-        {
-            _dependencyA = dependencyA;
-        }
-
-        public IDependencyA GetDependecy()
-        {
-            return _dependencyA;
-        }
-    }
-
     [TestFixture]
-    public class ClassWithSingleDependencyTests : TestFor<ClassWithSingleDependency>
+    public class ClassWithSingleDependencyTests : TestFor<ClassWithSingleInterfaceConstructor>
     {
         [Test]
         public void Should_Initialize_Instance()
         {
             Assert.IsNotNull(Target);
-            Assert.IsTrue(Target.GetType() == typeof(ClassWithSingleDependency));
+            Assert.IsTrue(Target.GetType() == typeof(ClassWithSingleInterfaceConstructor));
         }
     }
 
     [TestFixture]
-    public class ClassWithNoDependenciesTests : TestFor<ClassWithNoDependencies>
+    public class ClassWithNoDependenciesTests : TestFor<ClassWithEmptyDefaultConstructor>
     {
         [Test]
         public void Should_Initialize_Instance()
         {
             Assert.IsNotNull(Target);
-            Assert.IsTrue(Target.GetType() == typeof(ClassWithNoDependencies));
+            Assert.IsTrue(Target.GetType() == typeof(ClassWithEmptyDefaultConstructor));
         }
 
         [Test]
