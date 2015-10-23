@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moker", "Moker\Moker.csproj", "{4A1A2DAF-8594-4376-B924-386A2EFF065F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Softmex.Test", "Softmex.Test\Softmex.Test.csproj", "{4A1A2DAF-8594-4376-B924-386A2EFF065F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moker.Tests", "Moker.Tests\Moker.Tests.csproj", "{044F30C9-E2A9-453B-B1C1-0B980848F8B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Softmex.Test.Tests", "Softmex.Test.Tests\Softmex.Test.Tests.csproj", "{044F30C9-E2A9-453B-B1C1-0B980848F8B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

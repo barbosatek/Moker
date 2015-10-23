@@ -1,8 +1,8 @@
-﻿using Moker.Tests.TestClasses;
+﻿using Softmex.Test.Tests.TestClasses;
 using Moq;
 using NUnit.Framework;
 
-namespace Moker.Tests
+namespace Softmex.Test.Tests
 {
     /// TODO: Add tests for ICollection<IDependencies>
 

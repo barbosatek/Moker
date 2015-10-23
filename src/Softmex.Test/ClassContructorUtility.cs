@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace Moker
+namespace Softmex.Test
 {
     internal static class ClassContructorUtility
     {

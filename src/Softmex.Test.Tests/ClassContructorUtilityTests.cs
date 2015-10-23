@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Reflection;
-using Moker.Tests.TestClasses;
+using Softmex.Test.Tests.TestClasses;
 using NUnit.Framework;
 
-namespace Moker.Tests
+namespace Softmex.Test.Tests
 {
     [TestFixture]
     public class ClassContructorUtilityTests

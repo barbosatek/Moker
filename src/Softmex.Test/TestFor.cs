@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Moq;
 
-namespace Moker
+namespace Softmex.Test
 {
     public class TestFor<T> where T : class
     {

@@ -1,4 +1,4 @@
-﻿namespace Moker.Tests.TestClasses
+﻿namespace Softmex.Test.Tests.TestClasses
 {
     public class ClassWithSingleAbstractParameterConstructor
     {
