@@ -48,7 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Artifacts\AbstractClass.cs" />
     <Compile Include="Artifacts\ClassWithEmptyDefaultConstructor.cs" />
+    <Compile Include="Artifacts\ClassWithSingleAbstractParameterConstructor.cs" />
     <Compile Include="Artifacts\ClassWithSingleInterfaceConstructor.cs" />
     <Compile Include="Artifacts\IDependencyA.cs" />
     <Compile Include="Artifacts\IDependencyB.cs" />

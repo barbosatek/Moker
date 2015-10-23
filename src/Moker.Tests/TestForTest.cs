@@ -5,12 +5,25 @@ using NUnit.Framework;
 namespace Moker.Tests
 {
     [TestFixture]
+    public class TestForAbstractDependencyTests : TestFor<ClassWithSingleAbstractParameterConstructor>
+    {
+        [Test]
+        public void Should_Initialize_Instance()
+        {
+            Assert.IsNotNull(Target);
+            Assert.IsNotNull(Target.GetDependecy());
+            Assert.IsTrue(Target.GetType() == typeof(ClassWithSingleAbstractParameterConstructor));
+        }
+    }
+
+    [TestFixture]
     public class TestForSingleDependencyTests : TestFor<ClassWithSingleInterfaceConstructor>
     {
         [Test]
         public void Should_Initialize_Instance()
         {
             Assert.IsNotNull(Target);
+            Assert.IsNotNull(Target.GetDependecy());
             Assert.IsTrue(Target.GetType() == typeof(ClassWithSingleInterfaceConstructor));
         }
     }
