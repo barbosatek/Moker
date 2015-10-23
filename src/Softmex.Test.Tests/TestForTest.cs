@@ -1,6 +1,6 @@
-﻿using Softmex.Test.Tests.TestClasses;
-using Moq;
+﻿using Moq;
 using NUnit.Framework;
+using Softmex.Test.Tests.Artifacts;
 
 namespace Softmex.Test.Tests
 {

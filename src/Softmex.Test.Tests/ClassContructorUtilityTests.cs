@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
-using Softmex.Test.Tests.TestClasses;
 using NUnit.Framework;
+using Softmex.Test.Tests.Artifacts;
 
 namespace Softmex.Test.Tests
 {

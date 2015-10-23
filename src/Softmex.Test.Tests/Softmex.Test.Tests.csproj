@@ -48,16 +48,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestClasses\MultipleConstructorClass.cs" />
-    <Compile Include="TestClasses\NoConstructorClass.cs" />
-    <Compile Include="TestClasses\PrivateConstructorClass.cs" />
-    <Compile Include="TestClasses\PublicConstructorClass.cs" />
-    <Compile Include="TestClasses\AbstractClass.cs" />
-    <Compile Include="TestClasses\ClassWithEmptyDefaultConstructor.cs" />
-    <Compile Include="TestClasses\ClassWithSingleAbstractParameterConstructor.cs" />
-    <Compile Include="TestClasses\ClassWithSingleInterfaceConstructor.cs" />
-    <Compile Include="TestClasses\IDependencyA.cs" />
-    <Compile Include="TestClasses\IDependencyB.cs" />
+    <Compile Include="Artifacts\MultipleConstructorClass.cs" />
+    <Compile Include="Artifacts\NoConstructorClass.cs" />
+    <Compile Include="Artifacts\PrivateConstructorClass.cs" />
+    <Compile Include="Artifacts\PublicConstructorClass.cs" />
+    <Compile Include="Artifacts\AbstractClass.cs" />
+    <Compile Include="Artifacts\ClassWithEmptyDefaultConstructor.cs" />
+    <Compile Include="Artifacts\ClassWithSingleAbstractParameterConstructor.cs" />
+    <Compile Include="Artifacts\ClassWithSingleInterfaceConstructor.cs" />
+    <Compile Include="Artifacts\IDependencyA.cs" />
+    <Compile Include="Artifacts\IDependencyB.cs" />
     <Compile Include="ClassContructorUtilityTests.cs" />
     <Compile Include="TestForTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
