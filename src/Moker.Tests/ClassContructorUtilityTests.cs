@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Reflection;
-using Moker.Tests.Artifacts;
+using Moker.Tests.TestClasses;
 using NUnit.Framework;
 
 namespace Moker.Tests
@@ -50,38 +50,6 @@ namespace Moker.Tests
 
             Assert.IsNotNull(constructor);
             Assert.That(constructor.GetParameters().Length > 0);
-        }
-    }
-
-    internal class PrivateConstructorClass
-    {
-        private PrivateConstructorClass()
-        {
-        }
-    }
-
-    internal class NoConstructorClass
-    {
-    }
-
-    internal class PublicConstructorClass
-    {
-        public PublicConstructorClass()
-        {
-        }
-    }
-
-    internal class MultipleConstructorClass
-    {
-        private readonly IDependencyA _dependencyA;
-
-        public MultipleConstructorClass()
-        {
-        }
-
-        public MultipleConstructorClass(IDependencyA dependencyA)
-        {
-            _dependencyA = dependencyA;
         }
     }
 }

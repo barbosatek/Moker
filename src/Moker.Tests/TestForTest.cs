@@ -1,4 +1,4 @@
-﻿using Moker.Tests.Artifacts;
+﻿using Moker.Tests.TestClasses;
 using Moq;
 using NUnit.Framework;
 
