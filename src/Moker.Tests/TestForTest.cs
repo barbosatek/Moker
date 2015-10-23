@@ -4,6 +4,8 @@ using NUnit.Framework;
 
 namespace Moker.Tests
 {
+    /// TODO: Add tests for ICollection<IDependencies>
+
     [TestFixture]
     public class TestForAbstractDependencyTests : TestFor<ClassWithSingleAbstractParameterConstructor>
     {

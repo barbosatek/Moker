@@ -13,6 +13,7 @@ namespace Moker
 
         public TestFor()
         {
+            // TODO: We need to move the Target contruction to the Target setter becuase the constructor might do some logic that requires a setup on the dependencies
             ConstructorInfo constructor = ClassContructorUtility.GetConstructorWithLongestParamList(typeof (T));
             List<Type> parameterTypes = constructor.GetParameters().Select(x => x.ParameterType).ToList();
 
