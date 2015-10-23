@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Moker.Tests
 {
     [TestFixture]
-    public class ClassWithSingleDependencyTests : TestFor<ClassWithSingleInterfaceConstructor>
+    public class TestForSingleDependencyTests : TestFor<ClassWithSingleInterfaceConstructor>
     {
         [Test]
         public void Should_Initialize_Instance()
@@ -16,7 +16,7 @@ namespace Moker.Tests
     }
 
     [TestFixture]
-    public class ClassWithNoDependenciesTests : TestFor<ClassWithEmptyDefaultConstructor>
+    public class TestForNoDependenciesTests : TestFor<ClassWithEmptyDefaultConstructor>
     {
         [Test]
         public void Should_Initialize_Instance()
