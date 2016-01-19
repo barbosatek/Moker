@@ -28,6 +28,18 @@ namespace Softmex.Test.Tests
             Assert.IsNotNull(Target.GetDependecy());
             Assert.IsTrue(Target.GetType() == typeof(ClassWithSingleInterfaceConstructor));
         }
+
+        [Test]
+        public void Should_Create_Instances_On_Getter()
+        {
+            string value = "test";
+            The<IDependencyA>().Setup(x => x.Value).Returns(value);
+
+            Assert.IsNotNull(Target);
+            Assert.AreEqual(Target.DereferencedValueOnConstruction, value);
+            Assert.IsNotNull(Target.GetDependecy());
+            Assert.IsTrue(Target.GetType() == typeof(ClassWithSingleInterfaceConstructor));
+        }
     }
 
     [TestFixture]

@@ -8,12 +8,27 @@ namespace Softmex.Test
 {
     public class TestFor<T> where T : class
     {
-        public T Target { get; private set; }
+        public T Target
+        {
+            get
+            {
+                // TODO: Make thread safe
+                if (_target == null)
+                {
+                    CreateInstances();
+                }
+
+                return _target;
+            }
+
+            private set { _target = value; }
+        }
+
+        private T _target { get; set; }
         private readonly IDictionary<Type, Mock> _mocks = new Dictionary<Type, Mock>();
 
-        public TestFor()
+        public void CreateInstances()
         {
-            // TODO: We need to move the Target contruction to the Target setter becuase the constructor might do some logic that requires a setup on the dependencies
             ConstructorInfo constructor = ClassContructorUtility.GetConstructorWithLongestParamList(typeof (T));
             List<Type> parameterTypes = constructor.GetParameters().Select(x => x.ParameterType).ToList();
 
