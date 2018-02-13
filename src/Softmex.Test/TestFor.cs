@@ -2,77 +2,95 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Moq;
 
 namespace Softmex.Test
 {
-    public class TestFor<T> where T : class
+  public abstract class TestFor<T> : IDisposable where T : class
+  {
+    public T Target => _target ?? (_target = BuildTarget());
+    
+    private T _target;
+    protected abstract IDictionary<Type, object> GetMockedDependencies();
+    protected abstract object MockDependency(Type type);
+
+    private readonly Dictionary<Type, object> _dependencies;
+
+    protected TestFor()
     {
-        public T Target
+      _dependencies = new Dictionary<Type, object>();
+    }
+
+    public void SetDependency<T2>(T2 dependency) where T2 : class
+    {
+      var type = typeof(T2);
+      SetDependency(type, dependency);
+    }
+
+    public void SetDependency(Type type, object dependency)
+    {
+      if (!_dependencies.ContainsKey(type))
+      {
+        _dependencies.Add(type, dependency);
+      }
+      else
+      {
+        _dependencies[type] = dependency;
+      }
+    }
+
+    public T2 GetDependency<T2>() where T2 : class
+    {
+      var type = typeof(T2);
+      if (!_dependencies.ContainsKey(type))
+      {
+        return null;
+      }
+      else
+      {
+        return (T2)_dependencies[type];
+      }
+    }
+
+    private T BuildTarget()
+    {
+      ConstructorInfo constructor = TypeUtility.GetConstructorWithLongestParamList(typeof(T));
+      List<Type> parameterTypes = constructor.GetParameters().Select(x => x.ParameterType).ToList();
+      var mocks = GetMockedDependencies();
+
+      if (parameterTypes.Count > 0)
+      {
+        var parameters = new List<object>();
+        foreach (Type type in parameterTypes)
         {
-            get
+          if (!_dependencies.ContainsKey(type))
+          {
+            object dependency = null;
+
+            if (mocks.ContainsKey(type))
             {
-                // TODO: Make thread safe
-                if (_target == null)
-                {
-                    CreateInstances();
-                }
-
-                return _target;
-            }
-
-            private set { _target = value; }
-        }
-
-        private T _target { get; set; }
-        private readonly IDictionary<Type, Mock> _mocks = new Dictionary<Type, Mock>();
-
-        public void CreateInstances()
-        {
-            ConstructorInfo constructor = ClassContructorUtility.GetConstructorWithLongestParamList(typeof (T));
-            List<Type> parameterTypes = constructor.GetParameters().Select(x => x.ParameterType).ToList();
-
-            if (parameterTypes.Count > 0)
-            {
-                var parameterMocks = new List<Mock>();
-                foreach (Type type in parameterTypes)
-                {
-                    Mock mock;
-                    if (!_mocks.ContainsKey(type))
-                    {
-                        mock = BuildMock(type);
-                        _mocks.Add(type, mock);
-                    }
-                    else
-                    {
-                        mock = _mocks[type];
-                    }
-
-                    parameterMocks.Add(mock);
-                }
-                
-                Target = (T) constructor.Invoke(parameterMocks.Select(x => x.Object).ToArray());
+              dependency = mocks[type];
             }
             else
             {
-                Target = (T)Activator.CreateInstance(typeof(T));
-            }
-        }
-        
-        public Mock<T2> The<T2>() where T2 : class
-        {
-            if (!_mocks.ContainsKey(typeof (T2)))
-            {
-                _mocks.Add(typeof (T2), BuildMock(typeof(T2)));
+              dependency = MockDependency(type);
             }
 
-            return (Mock<T2>) _mocks[typeof (T2)];
+            _dependencies.Add(type, dependency);
+          }
+
+          parameters.Add(_dependencies[type]);
         }
 
-        private Mock BuildMock(Type objectType)
-        {
-            var mockType = typeof (Mock<>).MakeGenericType(objectType);
-            return (Mock) Activator.CreateInstance(mockType);
-        }
+        return (T)constructor.Invoke(parameters.ToArray());
+      }
+
+      return (T)Activator.CreateInstance(typeof(T));
     }
+    
+    public void Dispose()
+    {
+      _target = null;
+      _dependencies.Clear();
+    }
+  }
 }
