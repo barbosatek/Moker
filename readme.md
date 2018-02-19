@@ -11,7 +11,22 @@ A generic method that returns the mocked dependency. If the dependency hasn't be
     public void UnitTestExample()
     {
       // Arrange
-      The<IDependency>().Setup(x => x.GetValue()).Returns(Guid.NewGuid().ToString);
+      The<IDependency>().Setup(x => x.GetValue()).Returns(Guid.NewGuid().ToString());
+
+      // Act
+      var isValid = Target.AreDependenciesValid();
+
+      // Assert
+      isValid.Should().BeTrue();
+    }
+```
+# NSubstitute Examples
+```
+    [Fact]
+    public void UnitTestExample()
+    {
+      // Arrange
+      The<IDependency>().GetValue().Returns(Guid.NewGuid().ToString());
 
       // Act
       var isValid = Target.AreDependenciesValid();
