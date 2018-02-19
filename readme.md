@@ -15,6 +15,8 @@ This framework allows a cleaner way to mock dependencies on top of mocking frame
 
 ## Moq Examples
 ```
+  public class MoqTests : MoqTestFor<ClassUnderTest>
+  {
     [Fact]
     public void UnitTestExample()
     {
@@ -27,9 +29,12 @@ This framework allows a cleaner way to mock dependencies on top of mocking frame
       // Assert
       isValid.Should().BeTrue();
     }
+  }
 ```
 ## NSubstitute Examples
 ```
+  public class NSubstituteTests : NsubstituteTestFor<ClassUnderTest>
+  {
     [Fact]
     public void UnitTestExample()
     {
@@ -42,4 +47,5 @@ This framework allows a cleaner way to mock dependencies on top of mocking frame
       // Assert
       isValid.Should().BeTrue();
     }
+  }
 ```
