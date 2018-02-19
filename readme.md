@@ -3,9 +3,9 @@ This framework allows a cleaner way to mock dependencies on top of mocking frame
 ## Properties and Methods
 | Property / Method        | Description           |
 | ------------- |:-------------:|
-| Target      | A generic method that returns the mocked dependency. If the dependency hasn't been set, it creates it. |
-| The<T>      | TDB      |
-| The() | TDB      |
+| `Target`      | A generic method that returns the mocked dependency. If the dependency hasn't been set, it creates it. |
+| `The<T>`      | TDB      |
+| `The()` | TDB      |
 
 ## Moq Examples
 ```
