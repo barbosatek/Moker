@@ -1,4 +1,4 @@
-# AutoMock, test what matters!
+# AutoMock, unit test what matters!
 This framework allows testing units in a cleaner way by removing noisy code and focus on the code that matters. It allows the developer to:
 * Completely ignore dependencies not being used in the test unit, even if they're needed in the constructor.
 * Ignore delcaring mocks, the framework keeps track of them via the `The<T>()` method.
@@ -8,7 +8,7 @@ This framework allows testing units in a cleaner way by removing noisy code and 
 The framework currently provides implementations for Moq and NSubstitute, but it is flexible enough to add any other mocking framework.
 
 ## Properties and Methods
-### `TestFor<T>` (Base Class)
+`TestFor<T>` is the abstract base class, and it provides the following methods and properties.
 | Property / Method        | Description           |
 | ------------- |-------------|
 | `Target`      | Builds and returns an instance of the class under test. If the instance was already built, it returns it and doesn't re-create it. |
@@ -16,13 +16,13 @@ The framework currently provides implementations for Moq and NSubstitute, but it
 | `void SetDependency<T>(T dependency)` | Sets the dependency of `T`, if the dependency had already been set, it overrides it.      |
 | `void SetDependency(Type type, object dependency)` | Sets the dependency of provided type, if the dependency had already been set, it overrides it.      |
 
-### `MoqTestFor<T>` (Moq implementation)
+`MoqTestFor<T>` is the Moq implementation, and in addition to the base class functionality, it provides:
 | Property / Method        | Description           |
 | ------------- |-------------|
 | `Mock<T> The<T>()` | Creates and sets a `Mock` instance. If the instance was already created, it returns it.|
 | `Mock The(Type type)` | Creates and sets a `Mock` instance. If the instance was already created, it returns it.      |
 
-### `NSubstituteTestFor<T>` (NSubstitute implementation)
+`NSubstituteTestFor<T>` is the NSubstitute implementation, and in addition to the base class functionality, it provides:
 | Property / Method        | Description           |
 | ------------- |-------------|
 | `T The<T>()` | TDB      |
