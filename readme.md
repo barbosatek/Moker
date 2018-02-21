@@ -16,18 +16,6 @@ The framework currently provides implementations for Moq and NSubstitute, but it
 | `void SetDependency<T>(T dependency)` | Sets the dependency of `T`, if the dependency had already been set, it overrides it.      |
 | `void SetDependency(Type type, object dependency)` | Sets the dependency of provided type, if the dependency had already been set, it overrides it.      |
 
-`MoqTestFor<T>` is the Moq implementation, and in addition to the base class functionality, it provides:
-| Property / Method        | Description           |
-| ------------- |-------------|
-| `Mock<T> The<T>()` | Creates and sets a `Mock` instance. If the instance was already created, it returns it.|
-| `Mock The(Type type)` | Creates and sets a `Mock` instance. If the instance was already created, it returns it.      |
-
-`NSubstituteTestFor<T>` is the NSubstitute implementation, and in addition to the base class functionality, it provides:
-| Property / Method        | Description           |
-| ------------- |-------------|
-| `T The<T>()` | TDB      |
-| `object The(Type type)` | TDB      |
-
 ## Examples
 Consider the following class, and consider testing the `IsDependencyValid()` unit.
 ```
