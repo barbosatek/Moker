@@ -9,6 +9,7 @@ The framework currently provides implementations for Moq and NSubstitute, but it
 
 ## Properties and Methods
 `TestFor<T>` is the abstract base class, and it provides the following methods and properties.
+
 | Property / Method        | Description           |
 | ------------- |-------------|
 | `Target`      | Builds and returns an instance of the class under test. If the instance was already built, it returns it and doesn't re-create it. |
