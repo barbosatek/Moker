@@ -14,6 +14,7 @@ This framework allows a cleaner way to mock dependencies on top of mocking frame
 | `void SetDependency(Type type, object dependency)` | Sets the dependency of provided type, if the dependency had already been set, it overrides it.      |
 
 ## Moq Examples
+The following example shows how intantiating the mocks and the target class is not necessary.
 ```
   public class MoqTests : MoqTestFor<ClassUnderTest>
   {
@@ -24,13 +25,40 @@ This framework allows a cleaner way to mock dependencies on top of mocking frame
       The<IDependency>().Setup(x => x.GetValue()).Returns(Guid.NewGuid().ToString());
 
       // Act
-      var isValid = Target.AreDependenciesValid();
+      var isValid = Target.IsDependencyValid();
 
       // Assert
       isValid.Should().BeTrue();
     }
   }
 ```
+
+In comparison, this would be the "traditional" way to write the unit test with Moq
+
+```
+    [Fact]
+    public void UnitTestExample()
+    {
+      // Arrange
+      var dependencyMock = new Mock<IDependency>();
+      var secondDependencyMock = new Mock<ISecondDependency>();
+      var thirdDependencyMock = new Mock<IThirdDependency>();
+      var abstractDependencyMock = new Mock<AbstractDependency>();
+
+      dependencyMock.Setup(x => x.GetValue()).Returns(Guid.NewGuid().ToString());
+	  
+      var target = new ClassUnderTest(dependencyMock.Object, secondDependencyMock.Object, thirdDependencyMock.Object, abstractDependencyMock.Object);
+
+      // Act
+      var isValid = target.IsDependencyValid();
+
+      // Assert
+      isValid.Should().BeTrue();
+    }
+```
+
+Notice that AutoMock doesn't require declaring dependencies that aren't being used in the test unit.
+
 ## NSubstitute Examples
 ```
   public class NSubstituteTests : NsubstituteTestFor<ClassUnderTest>
