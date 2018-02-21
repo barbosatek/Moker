@@ -28,7 +28,7 @@ The framework currently provides implementations for Moq and NSubstitute, but it
 | `T The<T>()` | TDB      |
 | `object The(Type type)` | TDB      |
 
-## Moq Examples
+## Examples
 Consider the following class, and consider testing the `IsDependencyValid()` unit.
 ```
   public class ClassUnderTest
@@ -99,7 +99,7 @@ AutoMock will allow the developer to remove most of the code, the following exam
   }
 ```
 
-## NSubstitute Examples
+In a similar fashion, NSubstitute is also supported by inheriting from `NsubstituteTestFor<T>`.
 ```
   public class NSubstituteTests : NsubstituteTestFor<ClassUnderTest>
   {
