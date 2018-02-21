@@ -5,18 +5,28 @@ This framework allows testing units in a cleaner way by removing noisy code and 
 * Ignore instantiating the target class, the framework provides an instantes
 * Not worry about breaking tests when changing the parameter order in constructors.
 
+The framework currently provides implementations for Moq and NSubstitute, but it is flexible enough to add any other mocking framework.
 
 ## Properties and Methods
+### `TestFor<T>` (Base Class)
 | Property / Method        | Description           |
 | ------------- |-------------|
 | `Target`      | Builds and returns an instance of the class under tests. If the instance was already built, it returns it and doesn't re-create it. |
-| `Mock<T2> The<T2>()` | For `MoqTestFor<T>`, this method creates and sets a `Mock` instance. If the instance was already created, it returns it.|
-| `Mock The(Type type)` | For `MoqTestFor<T>`, this method creates and sets a `Mock` instance. If the instance was already created, it returns it.      |
-| `T2 The<T2>()` | TDB      |
-| `object The(Type type)` | TDB      |
-| `T2 GetDependency<T2>()` | Gets the dependency of `T2`, if the dependency wasn't set, it returns null.|
-| `void SetDependency<T2>(T2 dependency)` | Sets the dependency of `T2`, if the dependency had already been set, it overrides it.      |
+| `T GetDependency<T>()` | Gets the dependency of `T`, if the dependency wasn't set, it returns null.|
+| `void SetDependency<T>(T dependency)` | Sets the dependency of `T`, if the dependency had already been set, it overrides it.      |
 | `void SetDependency(Type type, object dependency)` | Sets the dependency of provided type, if the dependency had already been set, it overrides it.      |
+
+### `MoqTestFor<T>` (Moq implementation)
+| Property / Method        | Description           |
+| ------------- |-------------|
+| `Mock<T> The<T>()` | For `MoqTestFor<T>`, this method creates and sets a `Mock` instance. If the instance was already created, it returns it.|
+| `Mock The(Type type)` | For `MoqTestFor<T>`, this method creates and sets a `Mock` instance. If the instance was already created, it returns it.      |
+
+### `NSubstituteTestFor<T>` (NSubstitute implementation)
+| Property / Method        | Description           |
+| ------------- |-------------|
+| `T The<T>()` | TDB      |
+| `object The(Type type)` | TDB      |
 
 ## Moq Examples
 The following example shows how intantiating the mocks and the target class is not necessary.
