@@ -1,9 +1,9 @@
 # AutoMock, test what matters!
 This framework allows testing units in a cleaner way by removing noisy code and focus on the code that matters. It allows the developer to:
-*Completely ignore dependencies not being used in the test unit, even if they're needed in the constructor.
-*Ignore delcaring mocks, the framework keeps track of them via the `The<T>()` method.
-*Ignore instantiating the target class, the framework provides an instantes
-*Not worry about breaking tests when changing the parameter order in constructors.
+* Completely ignore dependencies not being used in the test unit, even if they're needed in the constructor.
+* Ignore delcaring mocks, the framework keeps track of them via the `The<T>()` method.
+* Ignore instantiating the target class, the framework provides an instantes
+* Not worry about breaking tests when changing the parameter order in constructors.
 
 
 ## Properties and Methods
